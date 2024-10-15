@@ -1,4 +1,4 @@
-package com.github.exoego.intellijbison
+package com.github.exoego.intellij.bison
 
 import com.intellij.DynamicBundle
 import org.jetbrains.annotations.NonNls

@@ -1,9 +1,9 @@
-package com.github.exoego.intellijbison.services
+package com.github.exoego.intellij.bison.services
 
 import com.intellij.openapi.components.Service
 import com.intellij.openapi.diagnostic.thisLogger
 import com.intellij.openapi.project.Project
-import com.github.exoego.intellijbison.MyBundle
+import com.github.exoego.intellij.bison.MyBundle
 
 @Service(Service.Level.PROJECT)
 class MyProjectService(project: Project) {

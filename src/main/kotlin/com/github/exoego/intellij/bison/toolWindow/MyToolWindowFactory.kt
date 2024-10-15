@@ -1,4 +1,4 @@
-package com.github.exoego.intellijbison.toolWindow
+package com.github.exoego.intellij.bison.toolWindow
 
 import com.intellij.openapi.components.service
 import com.intellij.openapi.diagnostic.thisLogger
@@ -8,8 +8,8 @@ import com.intellij.openapi.wm.ToolWindowFactory
 import com.intellij.ui.components.JBLabel
 import com.intellij.ui.components.JBPanel
 import com.intellij.ui.content.ContentFactory
-import com.github.exoego.intellijbison.MyBundle
-import com.github.exoego.intellijbison.services.MyProjectService
+import com.github.exoego.intellij.bison.MyBundle
+import com.github.exoego.intellij.bison.services.MyProjectService
 import javax.swing.JButton
 
 

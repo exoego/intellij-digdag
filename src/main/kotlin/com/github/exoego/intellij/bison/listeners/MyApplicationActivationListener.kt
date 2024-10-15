@@ -1,4 +1,4 @@
-package com.github.exoego.intellijbison.listeners
+package com.github.exoego.intellij.bison.listeners
 
 import com.intellij.openapi.application.ApplicationActivationListener
 import com.intellij.openapi.diagnostic.thisLogger
