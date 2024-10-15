@@ -28,7 +28,7 @@ To keep everything working, do not remove `<!-- ... -->` sections.
 
 - Using the IDE built-in plugin system:
   
-  <kbd>Settings/Preferences</kbd> > <kbd>Plugins</kbd> > <kbd>Marketplace</kbd> > <kbd>Search for "intellij-bison"</kbd> >
+  <kbd>Settings/Preferences</kbd> > <kbd>Plugins</kbd> > <kbd>Marketplace</kbd> > <kbd>Search for "bison-support"</kbd> >
   <kbd>Install</kbd>
   
 - Using JetBrains Marketplace:
