@@ -1,22 +1,39 @@
+import org.jetbrains.grammarkit.tasks.*
 import org.jetbrains.changelog.Changelog
 import org.jetbrains.changelog.markdownToHTML
 import org.jetbrains.intellij.platform.gradle.TestFrameworkType
 
 plugins {
     id("java") // Java support
-    alias(libs.plugins.kotlin) // Kotlin support
-    alias(libs.plugins.intelliJPlatform) // IntelliJ Platform Gradle Plugin
-    alias(libs.plugins.changelog) // Gradle Changelog Plugin
-    alias(libs.plugins.qodana) // Gradle Qodana Plugin
-    alias(libs.plugins.kover) // Gradle Kover Plugin
+    idea
+
+    alias(libs.plugins.kotlin)
+    alias(libs.plugins.kotlin.serialization)
+    alias(libs.plugins.intelliJPlatform)
+    alias(libs.plugins.grammarKit)
+    alias(libs.plugins.changelog)
+    alias(libs.plugins.qodana)
+    alias(libs.plugins.kover)
 }
 
 group = providers.gradleProperty("pluginGroup").get()
 version = providers.gradleProperty("pluginVersion").get()
 
-// Set the JVM language level used to build the project.
+
+java {
+    sourceCompatibility = JavaVersion.VERSION_17
+}
+
 kotlin {
     jvmToolchain(17)
+}
+
+sourceSets {
+    main {
+        java {
+            srcDir("generated")
+        }
+    }
 }
 
 // Configure project's dependencies
@@ -29,9 +46,22 @@ repositories {
     }
 }
 
+idea {
+    module {
+        sourceDirs = sourceDirs + listOf(file("src/main/grammar"), file("generated"))
+        generatedSourceDirs = generatedSourceDirs + listOf(file("generated"))
+    }
+}
+
+grammarKit {
+    jflexRelease.set(libs.versions.jflex.get())
+    grammarKitRelease.set(libs.versions.grammarKit.get())
+}
+
 // Dependencies are managed with Gradle version catalog - read more: https://docs.gradle.org/current/userguide/platforms.html#sub:version-catalog
 dependencies {
     testImplementation(libs.junit)
+    testImplementation(libs.opentest4j)
 
     // IntelliJ Platform Gradle Plugin Dependencies Extension - read more: https://plugins.jetbrains.com/docs/intellij/tools-intellij-platform-gradle-plugin-dependencies-extension.html
     intellijPlatform {
@@ -98,7 +128,8 @@ intellijPlatform {
         // The pluginVersion is based on the SemVer (https://semver.org) and supports pre-release labels, like 2.1.7-alpha.3
         // Specify pre-release label to publish the plugin in a custom Release Channel automatically. Read more:
         // https://plugins.jetbrains.com/docs/intellij/deployment.html#specifying-a-release-channel
-        channels = providers.gradleProperty("pluginVersion").map { listOf(it.substringAfter('-', "").substringBefore('.').ifEmpty { "default" }) }
+        channels = providers.gradleProperty("pluginVersion")
+            .map { listOf(it.substringAfter('-', "").substringBefore('.').ifEmpty { "default" }) }
     }
 
     pluginVerification {
@@ -133,6 +164,30 @@ tasks {
     publishPlugin {
         dependsOn(patchChangelog)
     }
+}
+
+val generateLexer by tasks.existing(GenerateLexerTask::class) {
+    val inputFile = "src/main/grammar/digdag.flex"
+    val outputDir = "generated/net/exoego/intellij/digdag/lexer"
+
+    inputs.file(inputFile)
+    outputs.dir(outputDir)
+
+    sourceFile.set(file(inputFile))
+    targetOutputDir.set(file(outputDir))
+    purgeOldFiles.set(true)
+}
+
+tasks.compileKotlin {
+    dependsOn(generateLexer)
+}
+
+tasks.clean {
+    delete("generated")
+}
+
+tasks.check {
+    dependsOn(tasks.verifyPlugin)
 }
 
 intellijPlatformTesting {

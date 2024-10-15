@@ -1,18 +1,33 @@
 <!-- Plugin Configuration File. Read more: https://plugins.jetbrains.com/docs/intellij/plugin-configuration-file.html -->
 <idea-plugin>
-    <id>com.github.exoego.intellij.bison</id>
-    <name>bison-support</name>
-    <vendor>exoego</vendor>
+    <id>net.exoego.intellij.digdag</id>
+    <name>Digdag</name>
+    <vendor>TATSUNO Yasuhiro</vendor>
 
     <depends>com.intellij.modules.platform</depends>
 
     <resource-bundle>messages.MyBundle</resource-bundle>
 
     <extensions defaultExtensionNs="com.intellij">
-        <toolWindow factoryClass="com.github.exoego.intellij.bison.toolWindow.MyToolWindowFactory" id="MyToolWindow"/>
+        <toolWindow factoryClass="net.exoego.intellij.digdag.toolWindow.MyToolWindowFactory" id="MyToolWindow"/>
+
+        <fileType name="Digdag" implementationClass="net.exoego.intellij.digdag.DigdagFileType"
+                  fieldName="INSTANCE" language="Digdag" extensions="dig"/>
+
+        <lang.syntaxHighlighterFactory language="Digdag"
+                                       implementationClass="net.exoego.intellij.digdag.DigdagSyntaxHighlighterFactory"/>
+        <lang.parserDefinition language="Digdag" implementationClass="net.exoego.intellij.digdag.DigdagParserDefinition"/>
+
+        <annotator language="Digdag" implementationClass="net.exoego.intellij.digdag.annotator.DigdagInvalidBlockChildrenErrorAnnotator"/>
+        <annotator language="Digdag" implementationClass="net.exoego.intellij.digdag.annotator.MyAnnotator"/>
+
+        <psi.referenceContributor language="Digdag" implementation="net.exoego.intellij.digdag.reference.DigdagFileReferenceContributor"/>
+
+        <lang.documentationProvider language="Digdag" implementationClass="net.exoego.intellij.digdag.documentation.DigdagWebDocUrlProvider"/>
     </extensions>
 
     <applicationListeners>
-        <listener class="com.github.exoego.intellij.bison.listeners.MyApplicationActivationListener" topic="com.intellij.openapi.application.ApplicationActivationListener"/>
+        <listener class="net.exoego.intellij.digdag.listeners.MyApplicationActivationListener"
+                  topic="com.intellij.openapi.application.ApplicationActivationListener"/>
     </applicationListeners>
 </idea-plugin>
