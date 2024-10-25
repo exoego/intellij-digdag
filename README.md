@@ -7,3 +7,8 @@
 <!-- Plugin description -->
 `.dig` file support for [Digdag](https://www.digdag.io/), open-source multi-cloud workflow engine.
 <!-- Plugin description end -->
+
+## Acknowledgement
+
+- [YAML Plugin](https://github.com/JetBrains/intellij-community/tree/4f782c94b7086af361e7c400d2035506848d11af/plugins/yaml)
+  for the base of the YAML support and custom language features.
