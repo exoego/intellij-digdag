@@ -19,7 +19,6 @@
         <lang.parserDefinition language="Digdag" implementationClass="net.exoego.intellij.digdag.DigdagParserDefinition"/>
 
         <annotator language="Digdag" implementationClass="net.exoego.intellij.digdag.annotator.DigdagInvalidBlockChildrenErrorAnnotator"/>
-        <annotator language="Digdag" implementationClass="net.exoego.intellij.digdag.annotator.MyAnnotator"/>
 
         <psi.referenceContributor language="Digdag" implementation="net.exoego.intellij.digdag.reference.DigdagFileReferenceContributor"/>
 
