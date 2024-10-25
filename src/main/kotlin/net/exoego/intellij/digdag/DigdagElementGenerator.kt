@@ -42,7 +42,7 @@ class DigdagElementGenerator(private val myProject: Project) {
         val digdagString = elementsMap
             .entries.stream()
             .sorted(java.util.Map.Entry.comparingByKey<String, String>())
-            .map { entry: Map.Entry<String?, String?> -> "%s: %s".formatted(entry.key, entry.value) }
+            .map { entry: Map.Entry<String?, String?> -> String.format("%s: %s", entry.key, entry.value) }
             .collect(Collectors.joining("\n"))
         return createDigdagKeyValue(keyName, digdagString)
     }
