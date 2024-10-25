@@ -5,15 +5,15 @@ import com.intellij.openapi.editor.HighlighterColors
 import com.intellij.openapi.editor.colors.TextAttributesKey
 
 object DigdagHighlighter {
-    val SCALAR_KEY_ID: String = "DIGDAG_SCALAR_KEY"
-    val SCALAR_TEXT_ID: String = "DIGDAG_SCALAR_VALUE"
-    val SCALAR_STRING_ID: String = "DIGDAG_SCALAR_STRING"
-    val SCALAR_DSTRING_ID: String = "DIGDAG_SCALAR_DSTRING"
-    val SCALAR_LIST_ID: String = "DIGDAG_SCALAR_LIST"
-    val COMMENT_ID: String = "DIGDAG_COMMENT"
-    val TEXT_ID: String = "DIGDAG_TEXT"
-    val SIGN_ID: String = "DIGDAG_SIGN"
-    val ANCHOR_ID: String = "DIGDAG_ANCHOR"
+    const val SCALAR_KEY_ID: String = "DIGDAG_SCALAR_KEY"
+    const val SCALAR_TEXT_ID: String = "DIGDAG_SCALAR_VALUE"
+    const val SCALAR_STRING_ID: String = "DIGDAG_SCALAR_STRING"
+    const val SCALAR_DSTRING_ID: String = "DIGDAG_SCALAR_DSTRING"
+    const val SCALAR_LIST_ID: String = "DIGDAG_SCALAR_LIST"
+    const val COMMENT_ID: String = "DIGDAG_COMMENT"
+    const val TEXT_ID: String = "DIGDAG_TEXT"
+    const val SIGN_ID: String = "DIGDAG_SIGN"
+    const val ANCHOR_ID: String = "DIGDAG_ANCHOR"
 
     // text attributes keys
     val SCALAR_KEY: TextAttributesKey =

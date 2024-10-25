@@ -1,7 +1,6 @@
 package net.exoego.intellij.digdag.annotator
 
 import com.intellij.lang.annotation.AnnotationHolder
-import com.intellij.lang.annotation.Annotator
 import com.intellij.lang.annotation.HighlightSeverity
 import com.intellij.openapi.util.TextRange
 import com.intellij.psi.PsiElement
@@ -9,13 +8,9 @@ import com.intellij.psi.impl.source.tree.LeafPsiElement
 import com.intellij.psi.impl.source.tree.TreeUtil
 import com.intellij.psi.templateLanguages.OuterLanguageElement
 import com.intellij.psi.util.PsiTreeUtil
-import com.intellij.psi.util.PsiUtilCore
 import com.intellij.psi.util.parentOfType
-import com.intellij.refactoring.suggested.endOffset
-import com.intellij.refactoring.suggested.startOffset
-import kotlin.math.min
+import com.intellij.psi.util.startOffset
 import net.exoego.intellij.digdag.DigdagBundle
-import net.exoego.intellij.digdag.DigdagTokenTypes
 import net.exoego.intellij.digdag.DigdagUtil
 import net.exoego.intellij.digdag.psi.DigdagKeyValue
 import net.exoego.intellij.digdag.psi.DigdagSequenceItem

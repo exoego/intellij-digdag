@@ -1,6 +1,5 @@
 package net.exoego.intellij.digdag.parser
 
-
 import com.intellij.lang.ASTNode
 import com.intellij.lang.LightPsiParser
 import com.intellij.lang.PsiBuilder
@@ -33,7 +32,6 @@ import net.exoego.intellij.digdag.DigdagTokenTypes.SEQUENCE_MARKER
 import net.exoego.intellij.digdag.DigdagTokenTypes.STAR
 import net.exoego.intellij.digdag.DigdagTokenTypes.TEXT
 import net.exoego.intellij.digdag.DigdagTokenTypes.WHITESPACE
-
 
 class DigdagParser : PsiParser, LightPsiParser {
     companion object {
@@ -403,7 +401,7 @@ class DigdagParser : PsiParser, LightPsiParser {
         var indentAddition = getShorthandIndentAddition()
         advanceLexer()
 
-        if (!myStopTokensStack.isEmpty() && myStopTokensStack.peek() == DigdagParser.HASH_STOP_TOKENS // This means we're inside some hash
+        if (!myStopTokensStack.isEmpty() && myStopTokensStack.peek() == HASH_STOP_TOKENS // This means we're inside some hash
             && getTokenType() === SCALAR_KEY
         ) {
             parseScalarKeyValue(indent)
@@ -473,7 +471,7 @@ class DigdagParser : PsiParser, LightPsiParser {
     private fun parseHash(): IElementType {
         assert(getTokenType() === LBRACE)
         advanceLexer()
-        myStopTokensStack.add(DigdagParser.HASH_STOP_TOKENS)
+        myStopTokensStack.add(HASH_STOP_TOKENS)
 
         while (!eof()) {
             if (getTokenType() === RBRACE) {
@@ -491,7 +489,7 @@ class DigdagParser : PsiParser, LightPsiParser {
     private fun parseArray(): IElementType {
         assert(getTokenType() === LBRACKET)
         advanceLexer()
-        myStopTokensStack.add(DigdagParser.ARRAY_STOP_TOKENS)
+        myStopTokensStack.add(ARRAY_STOP_TOKENS)
 
         while (!eof()) {
             if (getTokenType() === RBRACKET) {
@@ -511,7 +509,7 @@ class DigdagParser : PsiParser, LightPsiParser {
                 marker.error(DigdagBundle.message("parsing.error.sequence.item.expected"))
             }
 
-            if (getTokenType() === DigdagTokenTypes.COMMA) {
+            if (getTokenType() === COMMA) {
                 advanceLexer()
             }
         }

@@ -53,7 +53,7 @@ object DigdagUtil {
                 element = PsiTreeUtil.getParentOfType(element, DigdagKeyValue::class.java)
             }
             if (element is DigdagKeyValue) {
-                val keyText: String = (element as DigdagKeyValue).getKeyText()
+                val keyText: String = element.getKeyText()
                 result.add(keyText + elementIndexSuffix)
             }
             element = PsiTreeUtil.getParentOfType(element, DigdagKeyValue::class.java, DigdagSequenceItem::class.java)
@@ -75,7 +75,7 @@ object DigdagUtil {
     }
 
     fun getQualifiedKeyInDocument(document: DigdagDocument, key: List<String>): DigdagKeyValue? {
-        assert(!key.isEmpty())
+        assert(key.isNotEmpty())
 
         var mapping: DigdagMapping? = ObjectUtils.tryCast(document.getTopLevelValue(), DigdagMapping::class.java)
         for (i in key.indices) {
@@ -106,7 +106,7 @@ object DigdagUtil {
         if (node !is DigdagMapping) {
             return null
         }
-        return (node as DigdagMapping).getKeyValueByKey(keyText)
+        return node.getKeyValueByKey(keyText)
     }
 
     fun getValue(file: DigdagFile, vararg key: String): Pair<PsiElement, String>? {
@@ -227,7 +227,7 @@ object DigdagUtil {
         var element = element
         if (element is DigdagBlockMappingImpl) {
             try {
-                element = (element as DigdagBlockMappingImpl).getFirstKeyValue()
+                element = element.getFirstKeyValue()
             } catch (e: IllegalStateException) {
                 // Spring Boot plug-in modifies PSI-tree into invalid state
                 // This is a workaround over EA-133507 IDEA-210113
