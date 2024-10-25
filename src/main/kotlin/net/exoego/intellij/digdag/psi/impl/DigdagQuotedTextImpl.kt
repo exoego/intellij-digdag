@@ -107,7 +107,7 @@ class DigdagQuotedTextImpl(node: ASTNode) : DigdagScalarImpl(node), DigdagQuoted
     override fun getEncodeReplacements(input: CharSequence): List<Pair<TextRange, String>> {
         // check for consistency
         if (isSingleQuote()) {
-            for (i in 0 until input.length) {
+            for (i in input.indices) {
                 require(
                     !(input[i] == '\n' && !isSurroundedByNoSpace(
                         input,
@@ -122,7 +122,7 @@ class DigdagQuotedTextImpl(node: ASTNode) : DigdagScalarImpl(node), DigdagQuoted
 
         val result: MutableList<Pair<TextRange, String>> = ArrayList()
         var currentLength = 0
-        for (i in 0 until input.length) {
+        for (i in input.indices) {
             val c = input[i]
             if (c == '\n') {
                 if (!isSingleQuote() && i + 1 < input.length && DigdagGrammarCharUtil.isSpaceLike(input[i + 1])) {
@@ -243,14 +243,11 @@ class DigdagQuotedTextImpl(node: ASTNode) : DigdagScalarImpl(node), DigdagQuoted
             require(!(pos + 1 >= text.length || text[pos] != '\\')) { "This is not an escapement start" }
 
             val c = text[pos + 1]
-            return if (c == 'x') {
-                3
-            } else if (c == 'u') {
-                5
-            } else if (c == 'U') {
-                9
-            } else {
-                1
+            return when (c) {
+                'x' -> 3
+                'u' -> 5
+                'U' -> 9
+                else -> 1
             }
         }
 

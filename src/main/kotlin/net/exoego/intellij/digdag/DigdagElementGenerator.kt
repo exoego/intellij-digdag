@@ -21,7 +21,7 @@ import net.exoego.intellij.digdag.psi.impl.DigdagQuotedTextImpl
 class DigdagElementGenerator(private val myProject: Project) {
     companion object {
         fun getInstance(project: Project): DigdagElementGenerator =
-            project.getService(DigdagElementGenerator::class.java);
+            project.getService(DigdagElementGenerator::class.java)
 
         fun createChainedKey(keyComponents: List<String?>, indentAddition: Int): String {
             val sb = StringBuilder()
@@ -41,7 +41,7 @@ class DigdagElementGenerator(private val myProject: Project) {
     fun createDigdagKeyValueWithSequence(keyName: String, elementsMap: Map<String, String>): DigdagKeyValue {
         val digdagString = elementsMap
             .entries.stream()
-            .sorted(java.util.Map.Entry.comparingByKey<String, String>())
+            .sorted(java.util.Map.Entry.comparingByKey())
             .map { entry: Map.Entry<String?, String?> -> "%s: %s".formatted(entry.key, entry.value) }
             .collect(Collectors.joining("\n"))
         return createDigdagKeyValue(keyName, digdagString)

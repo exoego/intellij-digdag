@@ -6,7 +6,6 @@ import com.intellij.lexer.FlexAdapter
 import com.intellij.openapi.project.Project
 import com.intellij.psi.FileViewProvider
 import com.intellij.psi.PsiElement
-import com.intellij.psi.PsiFile
 import net.exoego.intellij.digdag.lexer._DigdagLexer
 import net.exoego.intellij.digdag.parser.DigdagParser
 import net.exoego.intellij.digdag.psi.impl.DigdagArrayImpl

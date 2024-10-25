@@ -6,7 +6,7 @@ import com.intellij.psi.tree.TokenSet
 import net.exoego.intellij.digdag.DigdagTokenTypes
 
 private val TOKENS_TO_MERGE: TokenSet = TokenSet.create(DigdagTokenTypes.TEXT)
-private const val DIRTY_STATE = 239;
+private const val DIRTY_STATE = 239
 
 class DigdagFlexLexer : MergingLexerAdapter(MyFlexAdapter(_DigdagLexer()), TOKENS_TO_MERGE)
 

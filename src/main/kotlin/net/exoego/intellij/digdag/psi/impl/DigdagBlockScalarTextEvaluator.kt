@@ -12,10 +12,7 @@ import org.jetbrains.annotations.Contract
 
 abstract class DigdagBlockScalarTextEvaluator<T : DigdagBlockScalarImpl>(host: T) : DigdagScalarTextEvaluator<T>(host) {
     protected open fun shouldIncludeEolInRange(child: ASTNode): Boolean {
-        if (isEol(child) && child.treeNext == null && getChompingIndicator() == ChompingIndicator.KEEP) {
-            return true
-        }
-        return false
+        return isEol(child) && child.treeNext == null && getChompingIndicator() == ChompingIndicator.KEEP
     }
 
     protected fun isEnding(rangeInHost: TextRange?): Boolean {
@@ -56,7 +53,7 @@ abstract class DigdagBlockScalarTextEvaluator<T : DigdagBlockScalarImpl>(host: T
                 if (isEol(child.treeNext)) {
                     if (thisLineStart == -1) {
                         Logger.getInstance(DigdagBlockScalarTextEvaluator::class.java)
-                            .warn(("thisLineStart == -1: '" + myHost.text).toString() + "'", Throwable())
+                            .warn("${"thisLineStart == -1: '" + myHost.text}'", Throwable())
                         child = child.treeNext
                         continue
                     }

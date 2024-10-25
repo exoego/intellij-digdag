@@ -24,9 +24,4 @@
 
         <lang.documentationProvider language="Digdag" implementationClass="net.exoego.intellij.digdag.documentation.DigdagWebDocUrlProvider"/>
     </extensions>
-
-    <applicationListeners>
-        <listener class="net.exoego.intellij.digdag.listeners.MyApplicationActivationListener"
-                  topic="com.intellij.openapi.application.ApplicationActivationListener"/>
-    </applicationListeners>
 </idea-plugin>

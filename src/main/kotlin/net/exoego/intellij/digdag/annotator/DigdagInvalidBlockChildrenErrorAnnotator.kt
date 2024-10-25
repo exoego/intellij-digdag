@@ -9,7 +9,7 @@ import com.intellij.psi.impl.source.tree.TreeUtil
 import com.intellij.psi.templateLanguages.OuterLanguageElement
 import com.intellij.psi.util.PsiTreeUtil
 import com.intellij.psi.util.parentOfType
-import com.intellij.refactoring.suggested.startOffset
+import com.intellij.psi.util.startOffset
 import net.exoego.intellij.digdag.DigdagBundle
 import net.exoego.intellij.digdag.DigdagUtil
 import net.exoego.intellij.digdag.psi.DigdagKeyValue
