@@ -6,6 +6,11 @@
 
 <!-- Plugin description -->
 `.dig` file support for [Digdag](https://www.digdag.io/), open-source multi-cloud workflow engine.
+
+- Syntax highlighting
+- File jumping for `!include` and etc.
+- Validation
+- and a lot more coming soon!
 <!-- Plugin description end -->
 
 ## Acknowledgement
