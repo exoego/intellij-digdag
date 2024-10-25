@@ -27,7 +27,7 @@ abstract class DigdagBlockScalarImpl(node: ASTNode) : DigdagScalarImpl(node) {
 
     override fun isMultiline(): Boolean = true
 
-    override fun getContentRanges(): List<TextRange> = CachedValuesManager.getCachedValue(this, CachedValueProvider {
+    override fun getContentRanges(): List<TextRange> = CachedValuesManager.getCachedValue(this) {
         val myStart = textRange.startOffset
         val indent = locateIndent()
 
@@ -58,7 +58,7 @@ abstract class DigdagBlockScalarImpl(node: ASTNode) : DigdagScalarImpl(node) {
                 else -> contentRanges.drop(1)
             }, PsiModificationTracker.MODIFICATION_COUNT
         )
-    })
+    }
 
     // it is a memory optimisation
     private val textCache: ReadActionCachedValue<String> = ReadActionCachedValue { super.getText() }
@@ -74,7 +74,7 @@ abstract class DigdagBlockScalarImpl(node: ASTNode) : DigdagScalarImpl(node) {
     fun hasExplicitIndent(): Boolean = explicitIndent != IMPLICIT_INDENT
 
     /**
-     * @return Nth child of this scalar block item type ([YAMLElementTypes.BLOCK_SCALAR_ITEMS]).
+     * @return Nth child of this scalar block item type ([DigdagElementTypes.BLOCK_SCALAR_ITEMS]).
      * Child with number 0 is a header. Content children have numbers more than 0.
      */
     fun getNthContentTypeChild(nth: Int): ASTNode? {
@@ -140,7 +140,7 @@ abstract class DigdagBlockScalarImpl(node: ASTNode) : DigdagScalarImpl(node) {
                 }
                 child = child.treeNext
             }
-            if (!currentLine.isEmpty()) {
+            if (currentLine.isNotEmpty()) {
                 result.add(currentLine)
             }
             return result

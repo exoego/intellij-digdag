@@ -81,14 +81,14 @@ class DigdagScalarTextImpl(node: ASTNode) : DigdagBlockScalarImpl(node), DigdagS
 
         var indent = locateIndent()
         if (indent == 0) {
-            indent = DigdagUtil.getIndentToThisElement(this) + DigdagBlockScalarImpl.DEFAULT_CONTENT_INDENT
+            indent = DigdagUtil.getIndentToThisElement(this) + DEFAULT_CONTENT_INDENT
         }
         val indentString = StringUtil.repeatSymbol(' ', indent)
 
         val result: MutableList<Pair<TextRange, String>> = ArrayList()
 
         var currentLength = 0
-        for (i in 0 until input.length) {
+        for (i in input.indices) {
             if (input[i] == '\n') {
                 result.add(
                     Pair.create(

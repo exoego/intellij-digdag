@@ -149,13 +149,9 @@ class DigdagKeyValueImpl(node: ASTNode):  DigdagPsiElementImpl(node) , DigdagKey
                 return name
             }
 
-            override fun getLocationString(): String? {
-                return digdagFile.getName()
-            }
+            override fun getLocationString(): String = digdagFile.getName()
 
-            override fun getIcon(open: Boolean): Icon? {
-                return this@DigdagKeyValueImpl.getIcon(0)
-            }
+            override fun getIcon(open: Boolean): Icon? = this@DigdagKeyValueImpl.getIcon(0)
         }
     }
 

@@ -15,7 +15,6 @@ import com.intellij.psi.impl.source.resolve.reference.ReferenceProvidersRegistry
 import javax.swing.Icon
 import net.exoego.intellij.digdag.DigdagElementTypes
 import net.exoego.intellij.digdag.DigdagGrammarCharUtil
-import net.exoego.intellij.digdag.DigdagTokenTypes
 import net.exoego.intellij.digdag.psi.DigdagPsiElementVisitor
 import net.exoego.intellij.digdag.psi.DigdagScalar
 import net.exoego.intellij.digdag.psi.impl.DigdagScalarImpl.Companion.processReplacements

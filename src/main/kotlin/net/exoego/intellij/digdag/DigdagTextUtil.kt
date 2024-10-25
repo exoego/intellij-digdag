@@ -26,8 +26,7 @@ object DigdagTextUtil {
         val buffer = StringBuilder()
         val indentString = StringUtil.repeatSymbol(' ', indent)
         buffer.append(indentString)
-        for (i in 0 until text.length) {
-            val c = text[i]
+        for (c in text) {
             buffer.append(c)
             if (c == '\n') {
                 buffer.append(indentString)
