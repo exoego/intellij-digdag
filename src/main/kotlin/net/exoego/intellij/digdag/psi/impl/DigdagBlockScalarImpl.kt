@@ -9,7 +9,6 @@ import com.intellij.psi.tree.IElementType
 import com.intellij.psi.util.CachedValueProvider
 import com.intellij.psi.util.CachedValuesManager
 import com.intellij.psi.util.PsiModificationTracker
-import com.intellij.psi.util.ReadActionCachedValue
 import com.intellij.util.SmartList
 import com.intellij.util.containers.ContainerUtil
 import com.intellij.util.text.splitLineRanges
@@ -59,15 +58,6 @@ abstract class DigdagBlockScalarImpl(node: ASTNode) : DigdagScalarImpl(node) {
             }, PsiModificationTracker.MODIFICATION_COUNT
         )
     }
-
-    // it is a memory optimisation
-    private val textCache: ReadActionCachedValue<String> = ReadActionCachedValue { super.getText() }
-
-    override fun getText(): String = textCache.getCachedOrEvaluate()
-
-    private val validCache: ReadActionCachedValue<Boolean> = ReadActionCachedValue { super.isValid() }
-
-    override fun isValid(): Boolean = validCache.getCachedOrEvaluate()
 
     protected open val includeFirstLineInContent: Boolean get() = false
 
