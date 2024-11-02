@@ -2,6 +2,7 @@ import org.jetbrains.grammarkit.tasks.*
 import org.jetbrains.changelog.Changelog
 import org.jetbrains.changelog.markdownToHTML
 import org.jetbrains.intellij.platform.gradle.TestFrameworkType
+import org.jetbrains.intellij.platform.gradle.tasks.VerifyPluginTask
 
 plugins {
     id("java") // Java support
@@ -133,6 +134,7 @@ intellijPlatform {
     }
 
     pluginVerification {
+        failureLevel = VerifyPluginTask.FailureLevel.ALL - listOf(VerifyPluginTask.FailureLevel.EXPERIMENTAL_API_USAGES)
         ides {
             recommended()
         }
