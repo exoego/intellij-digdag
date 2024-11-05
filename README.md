@@ -1,8 +1,8 @@
 # intellij-digdag
 
 ![Build](https://github.com/exoego/intellij-digdag/workflows/Build/badge.svg)
-[![Version](https://img.shields.io/jetbrains/plugin/v/MARKETPLACE_ID.svg)](https://plugins.jetbrains.com/plugin/MARKETPLACE_ID)
-[![Downloads](https://img.shields.io/jetbrains/plugin/d/MARKETPLACE_ID.svg)](https://plugins.jetbrains.com/plugin/MARKETPLACE_ID)
+[![Version](https://img.shields.io/jetbrains/plugin/v/25667.svg)](https://plugins.jetbrains.com/plugin/25667-digdag)
+[![Downloads](https://img.shields.io/jetbrains/plugin/d/25667.svg)](https://plugins.jetbrains.com/plugin/25667-digdag)
 
 <!-- Plugin description -->
 `.dig` file support for [Digdag](https://www.digdag.io/), open-source multi-cloud workflow engine.
