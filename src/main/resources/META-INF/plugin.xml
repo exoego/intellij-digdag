@@ -8,6 +8,8 @@
     <resource-bundle>messages.MyBundle</resource-bundle>
 
     <extensions defaultExtensionNs="com.intellij">
+        <supportsKotlinPluginMode supportsK2="true" />
+
         <toolWindow factoryClass="net.exoego.intellij.digdag.toolWindow.MyToolWindowFactory" id="MyToolWindow"/>
 
         <fileType name="Digdag" implementationClass="net.exoego.intellij.digdag.DigdagFileType"
