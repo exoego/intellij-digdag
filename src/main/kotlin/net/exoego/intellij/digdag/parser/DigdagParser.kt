@@ -7,7 +7,6 @@ import com.intellij.lang.PsiParser
 import com.intellij.lang.WhitespacesAndCommentsBinder
 import com.intellij.psi.tree.IElementType
 import com.intellij.psi.tree.TokenSet
-import com.intellij.util.containers.Stack
 import net.exoego.intellij.digdag.DigdagBundle
 import net.exoego.intellij.digdag.DigdagElementTypes
 import net.exoego.intellij.digdag.DigdagTokenTypes
@@ -44,7 +43,7 @@ class DigdagParser : PsiParser, LightPsiParser {
     private var myIndent = 0
     private var myAfterLastEolMarker: PsiBuilder.Marker? = null
 
-    private val myStopTokensStack = Stack<TokenSet>()
+    private val myStopTokensStack = ArrayDeque<TokenSet>()
 
     override fun parse(root: IElementType, builder: PsiBuilder): ASTNode {
         parseLight(root, builder)
@@ -114,7 +113,7 @@ class DigdagParser : PsiParser, LightPsiParser {
                 continue
             }
 
-            if (!myStopTokensStack.isEmpty() && myStopTokensStack.peek().contains(getTokenType())) {
+            if (!myStopTokensStack.isEmpty() && myStopTokensStack.first().contains(getTokenType())) {
                 rollBackToEol()
                 break
             }
@@ -401,7 +400,7 @@ class DigdagParser : PsiParser, LightPsiParser {
         var indentAddition = getShorthandIndentAddition()
         advanceLexer()
 
-        if (!myStopTokensStack.isEmpty() && myStopTokensStack.peek() == HASH_STOP_TOKENS // This means we're inside some hash
+        if (!myStopTokensStack.isEmpty() && myStopTokensStack.first() == HASH_STOP_TOKENS // This means we're inside some hash
             && getTokenType() === SCALAR_KEY
         ) {
             parseScalarKeyValue(indent)
@@ -411,7 +410,7 @@ class DigdagParser : PsiParser, LightPsiParser {
 
             parseBlockNode(indent + indentAddition, false)
 
-            myStopTokensStack.pop()
+            myStopTokensStack.removeLast()
 
             passJunk()
             if (getTokenType() === COLON) {
@@ -481,7 +480,7 @@ class DigdagParser : PsiParser, LightPsiParser {
             parseSingleStatement(0, 0)
         }
 
-        myStopTokensStack.pop()
+        myStopTokensStack.removeLast()
         dropEolMarker()
         return DigdagElementTypes.HASH
     }
@@ -514,7 +513,7 @@ class DigdagParser : PsiParser, LightPsiParser {
             }
         }
 
-        myStopTokensStack.pop()
+        myStopTokensStack.removeLast()
         dropEolMarker()
         return DigdagElementTypes.ARRAY
     }
