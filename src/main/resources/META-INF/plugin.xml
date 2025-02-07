@@ -24,5 +24,7 @@
         <psi.referenceContributor language="Digdag" implementation="net.exoego.intellij.digdag.reference.DigdagFileReferenceContributor"/>
 
         <lang.documentationProvider language="Digdag" implementationClass="net.exoego.intellij.digdag.documentation.DigdagWebDocUrlProvider"/>
+
+        <lang.commenter language="Digdag" implementationClass="net.exoego.intellij.digdag.DigdagCommenter"/>
     </extensions>
 </idea-plugin>
