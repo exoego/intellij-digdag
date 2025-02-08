@@ -25,8 +25,6 @@ val TEXT_ELEMENT_TYPES = setOf(
     DigdagElementTypes.SCALAR_QUOTED_STRING,
 )
 
-val KNOWN_EXTENSIONS = setOf("yml", "yaml", "sql", "dig", "txt", "csv")
-
 class DigdagFileReferenceContributor : PsiReferenceContributor() {
     override fun registerReferenceProviders(registrar: PsiReferenceRegistrar) {
         registrar.registerReferenceProvider(
@@ -57,26 +55,26 @@ object FileReferenceProvider : PsiReferenceProvider() {
         val textRange = escaper.relevantTextRange
         if (textRange.isEmpty) return PsiReference.EMPTY_ARRAY
 
-        val textValue = when (element) {
-            is DigdagQuotedTextImpl -> element.getTextValue()
-            is DigdagPlainTextImpl -> element.getTextValue()
-            else -> return PsiReference.EMPTY_ARRAY
+        val key = element.text.substring(textRange.startOffset, textRange.endOffset)
+        val maybeFile = listOf(
+            FileReference(element, textRange, key, element.containingFile),
+            // Support extension-less file reference for py> and rb> operators
+            FileReference(element, textRange, "$key.rb", element.containingFile),
+            FileReference(element, textRange, "$key.py", element.containingFile),
+        ).firstOrNull { it.resolve() != null }
+        if (maybeFile == null) {
+            return PsiReference.EMPTY_ARRAY
         }
-
-        // TODO: special support for python and ruby
-        if (!KNOWN_EXTENSIONS.contains(textValue.substringAfterLast(".").lowercase())) return PsiReference.EMPTY_ARRAY
-
-        return arrayOf(FileReference(element, textRange, element.containingFile))
+        return arrayOf(maybeFile)
     }
 }
 
 internal class FileReference(
     element: PsiElement,
     textRange: TextRange,
+    private val key: String,
     private val baseFile: PsiFile,
 ) : PsiReferenceBase<PsiElement>(element, textRange) {
-    private val key = element.text.substring(textRange.startOffset, textRange.endOffset)
-
     override fun resolve(): PsiElement? {
         val project = myElement.project
         val parentDir = baseFile.virtualFile.parent
