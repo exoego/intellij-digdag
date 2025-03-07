@@ -7,6 +7,7 @@ import net.exoego.intellij.digdag.DigdagUtil
 import net.exoego.intellij.digdag.psi.DigdagKeyValue
 import net.exoego.intellij.digdag.psi.DigdagMapping
 import net.exoego.intellij.digdag.psi.DigdagPsiElementVisitor
+import net.exoego.intellij.digdag.psi.DigdagSequence
 
 abstract class DigdagMappingImpl(node: ASTNode): DigdagCompoundValueImpl(node), DigdagMapping {
     override fun getKeyValues(): Collection<DigdagKeyValue> {
@@ -17,6 +18,24 @@ abstract class DigdagMappingImpl(node: ASTNode): DigdagCompoundValueImpl(node), 
         for (keyValue in getKeyValues()) {
             if (keyText == keyValue.getKeyText()) {
                 return keyValue
+            }
+        }
+        return null
+    }
+
+    override fun getChildMapping(keyText: String): DigdagMapping? {
+        for (element in this.children) {
+            if (element is DigdagKeyValue && element.getKeyText() == keyText) {
+                return element.getValue() as DigdagMapping
+            }
+        }
+        return null
+    }
+
+    override fun getChildSequence(keyText: String): DigdagSequence? {
+        for (element in this.children) {
+            if (element is DigdagKeyValue && element.getKeyText() == keyText) {
+                return element.getValue() as DigdagSequence
             }
         }
         return null

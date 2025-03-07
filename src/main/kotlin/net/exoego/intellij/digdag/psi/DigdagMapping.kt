@@ -5,6 +5,10 @@ interface DigdagMapping : DigdagCompoundValue {
 
     fun getKeyValueByKey(keyText: String): DigdagKeyValue?
 
+    fun getChildMapping(keyText: String): DigdagMapping?
+
+    fun getChildSequence(keyText: String): DigdagSequence?
+
     fun putKeyValue(keyValueToAdd: DigdagKeyValue)
 
     /**
