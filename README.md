@@ -17,3 +17,8 @@
 
 - [YAML Plugin](https://github.com/JetBrains/intellij-community/tree/4f782c94b7086af361e7c400d2035506848d11af/plugins/yaml)
   for the base of the YAML support and custom language features.
+
+## Development
+
+1. Code
+2. Run `./gradlew runIde` to start a new instance of IntelliJ IDEA with the plugin installed.
