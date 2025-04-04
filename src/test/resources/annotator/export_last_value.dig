@@ -24,4 +24,4 @@
           echo>: "step3. ${bar}" # ok, referencing the latest http.last_content
 
         +step4:
-          echo>: "step4. ${foo}"
+          echo>: <warning descr="${foo} is updated by the closest http">"step4. ${foo}"</warning>
