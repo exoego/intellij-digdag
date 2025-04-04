@@ -1,0 +1,27 @@
++fetch:
+  td>: https://dummyjson.com/products/1
+  query: "SELECT '${session_id}' FROM nasdaq"
+
++sub:
+    _export:
+      foo: ${td.last_results.count}
+
+    +step1:
+      echo>: "Product ${foo}" # ok
+
+    +step2:
+      echo>: "Product again ${foo}" # ok, still the same value
+
+    +fetch_other:
+      td>: https://dummyjson.com/products/1
+      query: "SELECT '${session_id}' FROM nasdaq"
+
+    +sub:
+        _export:
+          bar: ${td.last_results.count}
+
+        +step3:
+          echo>: "step3. ${bar}" # ok, referencing the latest http.last_content
+
+        +step4:
+          echo>: <warning descr="${foo} is updated by the closest td>">"step4. ${foo}"</warning>
