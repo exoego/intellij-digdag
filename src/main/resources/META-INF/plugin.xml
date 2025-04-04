@@ -29,4 +29,11 @@
 
         <lang.commenter language="Digdag" implementationClass="net.exoego.intellij.digdag.DigdagCommenter"/>
     </extensions>
+
+
+    <actions>
+        <action id="Digdag.NewDigdagFile" class="net.exoego.intellij.digdag.action.DigdagCreateFileAction">
+            <add-to-group group-id="NewGroup" anchor="before" relative-to-action="NewFile"/>
+        </action>
+    </actions>
 </idea-plugin>
