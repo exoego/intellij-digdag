@@ -8,6 +8,8 @@ import net.exoego.intellij.digdag.DigdagParserDefinition
      override fun includeRanges(): Boolean = true
      override fun getTestDataPath(): String = "src/test/resources/parser"
 
+     // src/test/resources/parser/***.txt are the expected result
+
      fun testBase() {
          doCodeTest(
              """ 
@@ -19,4 +21,6 @@ timezone: UTC
                  """.trimIndent()
          )
      }
+
+
 }
