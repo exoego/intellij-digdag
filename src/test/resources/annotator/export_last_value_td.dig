@@ -1,0 +1,31 @@
++fetch:
+  td>: https://dummyjson.com/products/1
+  query: "SELECT '${session_id}' FROM nasdaq"
+
++sub:
+    _export:
+      foo: ${td.last_results}
+      buz: ${td.last_results.count}
+
+    +step1:
+      echo>: "Product ${foo}" # ok
+
+    +step2:
+      echo>: "Product again ${foo}" # ok, still the same value
+
+    +fetch_other:
+      td>: https://dummyjson.com/products/1
+      query: "SELECT '${session_id}' FROM nasdaq"
+
+    +sub:
+        _export:
+          bar: ${td.last_results.count}
+
+        +step3:
+          echo>: "step3. ${bar}" # ok, referencing the latest td.last_results
+
+        +step4:
+          echo>: <warning descr="${foo} is overwritten by td> after ${foo} is defined">"step4. ${foo}"</warning>
+
+        +step5:
+          echo>: <warning descr="${buz} is overwritten by td> after ${buz} is defined">"step5. ${buz}"</warning>

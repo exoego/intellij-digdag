@@ -1,0 +1,27 @@
++fetch:
+  http>: https://dummyjson.com/products/1
+  store_content: true
+
++sub:
+    _export:
+      foo: "${  http.last_content  }"
+
+    +step1:
+      echo>: "Product ${foo}" # ok
+
+    +step2:
+      echo>: "Product again ${foo}" # ok, still the same value
+
+    +fetch_other:
+      http>: https://dummyjson.com/products/2
+      store_content: true
+
+    +sub:
+        _export:
+          bar: ${http.last_content}
+
+        +step3:
+          echo>: "step3. ${bar}" # ok, referencing the latest http.last_content
+
+        +step4:
+          echo>: <warning descr="${foo} is overwritten by http> after ${foo} is defined">"step4. ${foo}"</warning>

@@ -21,6 +21,7 @@
 
         <annotator language="Digdag" implementationClass="net.exoego.intellij.digdag.annotator.DigdagInvalidBlockChildrenErrorAnnotator"/>
         <annotator language="Digdag" implementationClass="net.exoego.intellij.digdag.annotator.DigdagUnknownOperatorAnnotator"/>
+        <annotator language="Digdag" implementationClass="net.exoego.intellij.digdag.annotator.DigdagExportLastValueAnnotator"/>
 
         <psi.referenceContributor language="Digdag" implementation="net.exoego.intellij.digdag.reference.DigdagFileReferenceContributor"/>
 
