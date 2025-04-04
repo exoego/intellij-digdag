@@ -1,0 +1,6 @@
+timezone: UTC
+
++step1:
+  sh>: <error descr="Invalid child element in a block mapping">tasks/sample.sh
+    invalid: foo</error>
+  foo: this is ok

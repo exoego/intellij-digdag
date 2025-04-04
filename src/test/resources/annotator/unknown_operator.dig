@@ -1,0 +1,19 @@
+timezone: UTC
+
+_export:
+  plugin:
+    repositories:
+      - https://DeNA.github.io/analytics-maven-repo
+    dependencies:
+      - com.dena.digdag:digdag-operator-bq-wait:0.1.1
+      - pro.civitaspo:digdag-operator-pg_lock:0.0.3
+
++step1:
+  sh>: tasks/sample.sh
+
++step2:
+  <warning descr="Unknown operator">no_such></warning>: Task::MyWorkflow.my_task
+  require: tasks/ruby
+
++step3:
+  bq_wait>: some_dataset.some_table
