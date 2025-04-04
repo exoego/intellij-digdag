@@ -13,7 +13,8 @@
 
 ## [0.0.6] - 2025-04-04
 
-- Annotate error on confusing usage of `http.last_content` and `td.last_results`
+- Annotate error on confusing usage of `http.last_content` and `td.last_results`.
+- Annotate warning on unknown operators.
 - Create file action.
 
 [Unreleased]: https://github.com/exoego/intellij-digdag/compare/v0.0.5...HEAD
