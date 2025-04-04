@@ -4,7 +4,8 @@
 
 +sub:
     _export:
-      foo: ${td.last_results.count}
+      foo: ${td.last_results}
+      buz: ${td.last_results.count}
 
     +step1:
       echo>: "Product ${foo}" # ok
@@ -21,7 +22,10 @@
           bar: ${td.last_results.count}
 
         +step3:
-          echo>: "step3. ${bar}" # ok, referencing the latest http.last_content
+          echo>: "step3. ${bar}" # ok, referencing the latest td.last_results
 
         +step4:
-          echo>: <warning descr="${foo} is updated by the closest td>">"step4. ${foo}"</warning>
+          echo>: <warning descr="${foo} is overwritten by td> after ${foo} is defined">"step4. ${foo}"</warning>
+
+        +step5:
+          echo>: <warning descr="${buz} is overwritten by td> after ${buz} is defined">"step5. ${buz}"</warning>
