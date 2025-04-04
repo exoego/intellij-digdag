@@ -43,4 +43,12 @@ abstract class DigdagAnnotatorTestCase: UsefulTestCase(), TestIndexingModeSuppor
         codeInsightTestFixture.configureByFile(file)
         codeInsightTestFixture.checkHighlighting()
     }
+
+    override fun tearDown() {
+        try {
+            codeInsightTestFixture.tearDown()
+        } finally {
+            super.tearDown()
+        }
+    }
 }
